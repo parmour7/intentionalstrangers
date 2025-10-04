@@ -1,306 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intentional Strangers - A Dating Experience for a Deeper Connection</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <!-- This new script configures Tailwind to recognize your custom fonts -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              'sans': ['Inter', 'sans-serif'],
-              'serif': ['Lora', 'serif'],
-            }
-          }
-        }
-      }
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intentional Strangers — Slow Dating by Letter</title>
+  <meta name="description" content="A slow dating experience via handwritten letters. Human‑curated matches, privacy by design. Vancouver pilot now open." />
+  <meta property="og:title" content="Intentional Strangers — Slow Dating by Letter" />
+  <meta property="og:description" content="Handwritten letters. Human‑curated matches. Privacy by design." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- The key fix is adding type="text/tailwindcss" to the style tag -->
-    <style type="text/tailwindcss">
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDF8F0; /* A warm, creamy off-white, like aged paper */
-            color: #3D352E; /* A deep, earthy brown, like dark ink */
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Lora', serif;
-        }
-        .lora-font {
-            font-family: 'Lora', serif;
-        }
-        .btn-primary {
-            @apply bg-[#4A423A] text-[#FDF8F0] px-8 py-3 rounded-full hover:bg-[#3D352E] transition-colors duration-300 shadow-lg;
-        }
-        .btn-secondary {
-            @apply bg-transparent border border-[#4A423A] text-[#4A423A] px-8 py-3 rounded-full hover:bg-[#4A423A] hover:text-[#FDF8F0] transition-colors duration-300;
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Interactive Envelope Styling */
-        .envelope-container {
-            cursor: pointer;
-            perspective: 1000px;
-        }
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background-color: #EAE2D6;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-        .envelope-container:hover .envelope {
-            transform: rotateY(5deg) rotateX(5deg);
-        }
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background-color: #DCD2C1;
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            transform-origin: top;
-            transition: transform 0.5s ease-in-out;
-            z-index: 10;
-        }
-        .envelope-container.open .envelope-flap {
-            transform: rotateX(180deg);
-        }
-        .letter {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 290px;
-            height: 190px;
-            background-color: #FDF8F0;
-            border-radius: 4px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05) inset;
-            transform: translateY(100%);
-            opacity: 0;
-            transition: transform 0.6s 0.2s, opacity 0.6s 0.2s;
-            z-index: 5;
-        }
-        .envelope-container.open .letter {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .wax-seal {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-color: #C0392B;
-            border-radius: 50%;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 11;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #E74C3C;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-        }
-    </style>
+  <!-- Fonts: Serif for headlines, Handwritten for letter, Sans for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind layers (only Tailwind directives & @apply here) -->
+  <style type="text/tailwindcss">
+    @layer base {
+      :root { --brand:#4A423A; --brand-2:#3D352E; --paper:#FDF8F0; --ink:#3D352E; --accent:#C0392B; --sand:#EAE2D6; --muted:#6F655B; }
+      html { scroll-behavior: smooth; }
+      body { @apply bg-[var(--paper)] text-[var(--ink)] font-sans antialiased; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      h1,h2,h3,h4,h5,h6 { font-family: 'Lora', ui-serif, Georgia, serif; }
+      .lora-font { font-family: 'Lora', ui-serif, Georgia, serif; }
+      .hand-font { font-family: 'Patrick Hand', ui-rounded, system-ui; }
+      a { @apply outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:rounded; }
+      button { @apply outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:rounded; }
+    }
+    @layer components {
+      .btn-primary { @apply bg-[var(--brand)] text-[var(--paper)] px-6 py-3 rounded-full shadow hover:bg-[var(--brand-2)] transition-colors duration-300 inline-flex items-center justify-center; }
+      .btn-secondary { @apply border border-[var(--brand)] text-[var(--brand)] px-5 py-2 rounded-full hover:bg-[var(--brand)] hover:text-[var(--paper)] transition-colors duration-300 inline-flex items-center justify-center; }
+      .section { @apply py-24 px-4; }
+    }
+    @layer utilities {
+      .fade-in { @apply opacity-0 translate-y-3 transition-all duration-700 ease-out; }
+      .fade-in.visible { @apply opacity-100 translate-y-0; }
+    }
+  </style>
+
+  <!-- Any raw CSS that is not Tailwind goes here -->
+  <style>
+    /* Envelope construction */
+    .envelope-container { width: 320px; height: 220px; position: relative; perspective: 1000px; }
+    .envelope { position:absolute; inset:0; background: linear-gradient(#f7efe5, #efe4d6); border:1px solid #dbcdbb; border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,.08); }
+    .envelope-flap { position:absolute; top:0; left:0; right:0; height:60%; background:linear-gradient(#f2e7d8,#e9dece); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .6s ease-in-out; z-index:10; }
+    .wax-seal { position:absolute; width:40px; height:40px; background-color: var(--accent); border-radius:50%; top:80px; left:50%; transform:translateX(-50%); z-index:11; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; letter-spacing:.5px; }
+    .letter { position:absolute; top:8px; left:8px; right:8px; bottom:8px; background:var(--paper); border-radius:6px; padding:18px 18px 22px; box-shadow: inset 0 0 10px rgba(0,0,0,.06); transform: translateY(60%); opacity:0; transition: transform .7s .15s, opacity .7s .15s; z-index:5; overflow:auto; }
+    .envelope-container.open .envelope-flap { transform: rotateX(180deg); }
+    .envelope-container.open .letter { transform: translateY(0); opacity:1; }
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in, .envelope-flap, .letter { transition: none !important; }
+    }
+  </style>
 </head>
-<body class="antialiased">
 
-    <!-- Header Section -->
-    <header class="py-6 px-4 sm:px-8 flex justify-between items-center">
-        <h1 class="text-2xl lora-font font-medium">Intentional Strangers</h1>
-        <nav>
-            <a href="#how-it-works" class="hidden sm:inline mx-4 hover:text-[#C0392B]">How It Works</a>
-            <a href="#pledge" class="hidden sm:inline mx-4 hover:text-[#C0392B]">Our Pledge</a>
-            <a href="#waitlist" class="btn-secondary text-sm">Join Waitlist</a>
-        </nav>
-    </header>
+<body>
+  <!-- Header -->
+  <header class="py-6 px-4 sm:px-8 flex justify-between items-center">
+    <p class="text-2xl lora-font font-medium">Intentional Strangers</p>
+    <nav class="flex items-center gap-4">
+      <a href="#how-it-works" class="hidden sm:inline hover:text-[var(--accent)]">How It Works</a>
+      <a href="#pledge" class="hidden sm:inline hover:text-[var(--accent)]">Our Pledge</a>
+      <a href="#waitlist" class="btn-secondary text-sm">Join Waitlist</a>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <main class="text-center py-20 px-4">
-        <h2 class="text-4xl md:text-6xl lora-font font-medium leading-tight max-w-3xl mx-auto">Your Next Chapter Begins with a Letter.</h2>
-        <p class="mt-6 text-lg max-w-2xl mx-auto text-[#6F655B]">
-            A slow dating experience for those who value words over algorithms. We connect thoughtful souls through the lost art of handwritten letters, fostering connections that are patient, private, and profound.
-        </p>
-        <div class="mt-10">
-            <a href="#waitlist" class="btn-primary">Become a Founding Member</a>
+  <!-- Hero -->
+  <main class="text-center section pt-16">
+    <h1 class="text-4xl md:text-6xl lora-font font-semibold leading-tight max-w-3xl mx-auto">Your Next Chapter Begins with a Letter.</h1>
+    <p class="mt-6 text-lg max-w-2xl mx-auto text-[var(--muted)]">A slow dating experience for those who value words over algorithms. We connect thoughtful souls through the lost art of handwritten letters, fostering connections that are patient, private, and profound.</p>
+
+    <!-- Centered envelope with accessible button -->
+    <div class="mt-12 flex justify-center">
+      <button id="envelope" class="envelope-container group" aria-expanded="false" aria-controls="letter-panel" type="button">
+        <div class="envelope" aria-hidden="true"></div>
+        <div class="envelope-flap" aria-hidden="true"></div>
+        <div class="wax-seal" aria-hidden="true">IS</div>
+        <!-- Revealed letter content -->
+        <div id="letter-panel" class="letter">
+          <p class="hand-font text-xl leading-7 text-[rgba(0,0,0,.8)]">Dear Stranger,</p>
+          <p class="hand-font text-xl leading-7 mt-2 text-[rgba(0,0,0,.75)]">What a beautiful idea this is... I am so glad to have been matched and finally get to know someone deeply. The swiping was killing me to be honest!</p>
+          <p class="hand-font text-xl leading-7 mt-2 text-[rgba(0,0,0,.75)]">I thought I would start by telling you a little about what’s important to me...</p>
+          <p class="hand-font text-sm mt-4 text-right text-[rgba(0,0,0,.55)]">— in pencil, just the way letters used to be</p>
         </div>
-    </main>
+      </button>
+    </div>
+    <p id="envelope-cta" class="mt-4 text-sm text-[var(--muted)] transition-opacity duration-500">(Press Enter or click the envelope to open)</p>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-24 bg-[#EAE2D6] px-4">
-        <div class="text-center max-w-4xl mx-auto">
-            <h3 class="text-3xl md:text-4xl lora-font mb-4">The Art of Slow Dating</h3>
-            <p class="text-lg text-[#6F655B] mb-16">A simple, intentional process to rediscover romance.</p>
+    <div class="mt-10">
+      <a href="#waitlist" class="btn-primary">Become a Founding Member</a>
+    </div>
+  </main>
 
-            <div class="grid md:grid-cols-3 gap-12 text-left">
-                <!-- Step 1 -->
-                <div class="fade-in">
-                    <div class="lora-font text-5xl text-[#C0392B] mb-4">1.</div>
-                    <h4 class="text-2xl lora-font mb-2">Share Your Story</h4>
-                    <p class="text-[#6F655B]">You begin not with a profile, but with a conversation. Our thoughtful questionnaire goes beyond surface-level details, helping us understand the values, quirks, and dreams that make you, you.</p>
-                </div>
-                <!-- Step 2 -->
-                <div class="fade-in" style="transition-delay: 200ms;">
-                    <div class="lora-font text-5xl text-[#C0392B] mb-4">2.</div>
-                    <h4 class="text-2xl lora-font mb-2">A Thoughtful Match</h4>
-                    <p class="text-[#6F655B]">No algorithms, just human intuition. Based on your story, we find another soul whose narrative resonates with yours. We believe the best connections are curated with care, not code.</p>
-                </div>
-                <!-- Step 3 -->
-                <div class="fade-in" style="transition-delay: 400ms;">
-                    <div class="lora-font text-5xl text-[#C0392B] mb-4">3.</div>
-                    <h4 class="text-2xl lora-font mb-2">Begin Your Correspondence</h4>
-                    <p class="text-[#6F655B]">A beautifully prepared letter pack arrives at your door. Inside, you'll find everything you need to begin. Your privacy is paramount; addresses are always anonymous, relayed through our secure hub.</p>
-                </div>
-            </div>
+  <!-- How It Works -->
+  <section id="how-it-works" class="section bg-[var(--sand)]">
+    <div class="text-center max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl lora-font mb-4">The Art of Slow Dating</h2>
+      <p class="text-lg text-[var(--muted)] mb-16">A simple, intentional process to rediscover romance.</p>
+
+      <div class="grid md:grid-cols-3 gap-12 text-left">
+        <div class="fade-in">
+          <div class="lora-font text-5xl text-[var(--accent)] mb-4">1.</div>
+          <h3 class="text-2xl lora-font mb-2">Share Your Story</h3>
+          <p class="text-[var(--muted)]">You begin not with a profile, but with a conversation. Our thoughtful questionnaire goes beyond surface-level details, helping us understand the values, quirks, and dreams that make you, you.</p>
         </div>
-    </section>
-
-    <!-- Interactive Experience Section -->
-    <section class="py-24 px-4 text-center">
-        <h3 class="text-3xl md:text-4xl lora-font mb-4">Rediscover the Magic of Anticipation</h3>
-        <p class="text-lg text-[#6F655B] mb-12 max-w-2xl mx-auto">The weight of an envelope. The unique curve of another's handwriting. <br class="hidden md:block">The thrill of checking the mail for something other than bills.</p>
-
-        <!-- Interactive Envelope -->
-        <div id="envelope" class="envelope-container mx-auto">
-            <div class="envelope">
-                <div class="envelope-flap"></div>
-                <div class="wax-seal">✉️</div>
-                <div class="letter lora-font text-left text-sm text-[#3D352E]">
-                    <p class="font-bold mb-2">A prompt to begin your story...</p>
-                    <p>"Describe a perfect, ordinary Sunday. From the moment you wake up to a when your head hits the pillow. What do you see, hear, taste, and feel?"</p>
-                    <p class="mt-4 text-xs text-right text-[#6F655B]">- Intentional Strangers</p>
-                </div>
-            </div>
-            <p id="envelope-cta" class="mt-6 text-sm text-[#6F655B] transition-opacity duration-500">(Click the envelope to open)</p>
+        <div class="fade-in" style="transition-delay:200ms">
+          <div class="lora-font text-5xl text-[var(--accent)] mb-4">2.</div>
+          <h3 class="text-2xl lora-font mb-2">A Thoughtful Match</h3>
+          <p class="text-[var(--muted)]">No algorithms, just human intuition. Based on your story, we find another soul whose narrative resonates with yours. We believe the best connections are curated with care, not code.</p>
         </div>
-    </section>
-    
-    <!-- Our Pledge Section -->
-    <section id="pledge" class="py-24 bg-[#EAE2D6] px-4">
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="fade-in">
-                <h3 class="text-3xl md:text-4xl lora-font mb-6">Our Pledge to This Community</h3>
-                <div class="space-y-4 text-[#6F655B]">
-                    <p>✓ <span class="font-semibold">Patience & Presence:</span> We encourage thoughtful replies, not instant reactions. This is a space to disconnect and be present.</p>
-                    <p>✓ <span class="font-semibold">Authenticity Over Perfection:</span> Your true self is more interesting than a polished profile. Share your honest thoughts and stories.</p>
-                    <p>✓ <span class="font-semibold">Privacy by Design:</span> Your personal contact details are never shared. We handle the logistics so you can focus on the connection.</p>
-                    <p>✓ <span class="font-semibold">Kindness is Mandatory:</span> Every stranger is a person with a story. We have a zero-tolerance policy for disrespect.</p>
-                </div>
-            </div>
-            <div class="fade-in text-center p-8 bg-[#FDF8F0] rounded-lg shadow-lg" style="transition-delay: 200ms;">
-                <p class="text-2xl lora-font leading-relaxed">"We ask that you exchange at least <span class="text-[#C0392B] font-bold">three letters</span> before sharing personal social media or phone numbers. Let the connection build on words first."</p>
-            </div>
+        <div class="fade-in" style="transition-delay:400ms">
+          <div class="lora-font text-5xl text-[var(--accent)] mb-4">3.</div>
+          <h3 class="text-2xl lora-font mb-2">Begin Your Correspondence</h3>
+          <p class="text-[var(--muted)]">A beautifully prepared letter pack arrives at your door. Inside, you'll find everything you need to begin. Your privacy is paramount; addresses are always anonymous, relayed through our secure hub.</p>
         </div>
-    </section>
+      </div>
 
+      <!-- NEW CTA under The Art of Slow Dating -->
+      <div class="mt-12">
+        <a href="#waitlist" class="btn-primary">Be a part of the Vancouver Pilot</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Waitlist CTA Section -->
-    <section id="waitlist" class="py-24 px-4 text-center">
-        <h3 class="text-3xl md:text-4xl lora-font mb-4">Become a Founding Member</h3>
-        <p class="text-lg text-[#6F655B] mb-12 max-w-2xl mx-auto">Our Vancouver pilot is beginning soon. The first 150 members will help shape our community and receive their first letter pack on us.</p>
-        
-        <!-- Interactive Multi-step Form -->
-        <div id="form-container" class="max-w-md mx-auto bg-white/50 p-8 rounded-lg shadow-inner border border-gray-200">
-            <div id="form-step-1">
-                <label for="name" class="block text-lg lora-font mb-2">First, what's your first name?</label>
-                <input type="text" id="name" placeholder="e.g. Alex" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-[#C0392B] focus:outline-none transition">
-                <button onclick="nextStep(2)" class="mt-4 btn-primary w-full">Next</button>
-            </div>
-            <div id="form-step-2" class="hidden">
-                 <label for="email" class="block text-lg lora-font mb-2">And your email address?</label>
-                <input type="email" id="email" placeholder="alex@example.com" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-[#C0392B] focus:outline-none transition">
-                <button onclick="nextStep(3)" class="mt-4 btn-primary w-full">Join the Waitlist</button>
-            </div>
-            <div id="form-step-3" class="hidden">
-                 <p class="text-2xl lora-font">Welcome, Stranger.</p>
-                 <p class="mt-2 text-[#6F655B]">We're so glad you're here. We'll be in touch soon with details about the pilot. The kettle is on.</p>
-            </div>
+  <!-- Rediscover Anticipation -->
+  <section class="section text-center">
+    <h2 class="text-3xl md:text-4xl lora-font mb-4">Rediscover the Magic of Anticipation</h2>
+    <p class="text-lg text-[var(--muted)] mb-10 max-w-2xl mx-auto">The weight of an envelope. The unique curve of another's handwriting. The gentle pause before you unfold their words. Romance can be slow—and that’s the point.</p>
+  </section>
+
+  <!-- Our Pledge -->
+  <section id="pledge" class="section bg-[var(--sand)]">
+    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="fade-in">
+        <h2 class="text-3xl md:text-4xl lora-font mb-6">Our Pledge to This Community</h2>
+        <div class="space-y-4 text-[var(--muted)]">
+          <p>✓ <span class="font-semibold">Patience &amp; Presence:</span> We encourage thoughtful replies, not instant reactions. This is a space to disconnect and be present.</p>
+          <p>✓ <span class="font-semibold">Authenticity Over Perfection:</span> Your true self is more interesting than a polished profile. Share your honest thoughts and stories.</p>
+          <p>✓ <span class="font-semibold">Privacy by Design:</span> Your personal contact details are never shared. We handle the logistics so you can focus on the connection.</p>
+          <p>✓ <span class="font-semibold">Kindness is Mandatory:</span> Every stranger is a person with a story. We have a zero‑tolerance policy for disrespect.</p>
         </div>
-    </section>
+      </div>
+      <div class="fade-in p-8 bg-[var(--paper)] rounded-lg shadow-lg" style="transition-delay:200ms">
+        <p class="text-2xl lora-font leading-relaxed">"We ask that you exchange at least <span class="text-[var(--accent)] font-bold">three letters</span> before sharing personal social media or phone numbers. Let the connection build on words first."</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="text-center py-12 px-4 border-t border-[#EAE2D6]">
-        <p class="lora-font text-xl">Intentional Strangers</p>
-        <p class="mt-2 text-sm text-[#6F655B]">© 2025. Made with ❤️ in Vancouver for thoughtful souls everywhere.</p>
-    </footer>
+  <!-- Waitlist CTA -->
+  <section id="waitlist" class="section text-center">
+    <h2 class="text-3xl md:text-4xl lora-font mb-4">Become a Founding Member</h2>
+    <p class="text-lg text-[var(--muted)] max-w-2xl mx-auto">Our Vancouver pilot is beginning soon. The first 150 members will help shape our community and receive their first letter pack on us.</p>
+    <!-- NEW copy per request -->
+    <p class="text-lg text-[var(--muted)] max-w-3xl mx-auto mt-4">You will then receive an email directing you towards an in‑depth analysis of you as a person. Your morals, values, interests, hobbies, and any strong preferences you have. We believe anyone willing to partake in this journey, and dedicate the time to populising the questionnaire, shows a real intention to find love. There is no instant gratification, superficial swiping or hookup culture here.</p>
 
-    <script>
-        // --- Interactive Envelope Script ---
-        const envelope = document.getElementById('envelope');
-        const envelopeCta = document.getElementById('envelope-cta');
-        envelope.addEventListener('click', () => {
-            envelope.classList.toggle('open');
-            if(envelope.classList.contains('open')) {
-                envelopeCta.style.opacity = '0';
-            } else {
-                envelopeCta.style.opacity = '1';
-            }
-        });
+    <!-- Form -->
+    <div id="form-container" class="mt-10 max-w-md mx-auto bg-white/60 p-8 rounded-lg shadow-inner border border-gray-200 text-left">
+      <form id="waitlist-form" novalidate>
+        <!-- Honeypot to reduce spam -->
+        <input type="text" name="city" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        // --- Fade-in on Scroll Script ---
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOptions = {
-            threshold: 0.2,
-            rootMargin: "0px 0px -50px 0px"
-        };
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('visible');
-                    appearOnScroll.unobserve(entry.target);
-                }
-            });
-        }, appearOptions);
+        <div id="form-step-1">
+          <label for="name" class="block text-lg lora-font mb-2">First, what's your first name?</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Alex" required class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-[var(--accent)] focus:outline-none transition">
+          <button type="button" data-next="2" class="mt-4 btn-primary w-full">Next</button>
+        </div>
 
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
-        });
+        <div id="form-step-2" class="hidden">
+          <label for="email" class="block text-lg lora-font mb-2">And your email address?</label>
+          <input type="email" id="email" name="email" placeholder="alex@example.com" required autocomplete="email" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-[var(--accent)] focus:outline-none transition">
+          <button type="submit" class="mt-4 btn-primary w-full">Join the Waitlist</button>
+        </div>
 
-        // --- Multi-step Form Script ---
-        function nextStep(step) {
-            if (step === 2) {
-                const nameInput = document.getElementById('name');
-                if (nameInput.value.trim() === '') {
-                    alert('Please enter your name.');
-                    return;
-                }
-            }
-            if (step === 3) {
-                 const emailInput = document.getElementById('email');
-                if (emailInput.value.trim() === '' || !emailInput.value.includes('@')) {
-                    alert('Please enter a valid email address.');
-                    return;
-                }
-            }
+        <div id="form-step-3" class="hidden text-center">
+          <p class="text-2xl lora-font">Welcome, Stranger.</p>
+          <p class="mt-2 text-[var(--muted)]">We'll be in touch soon with details about the pilot. The kettle is on.</p>
+        </div>
+      </form>
+    </div>
+  </section>
 
-            document.getElementById('form-step-1').classList.add('hidden');
-            document.getElementById('form-step-2').classList.add('hidden');
-            document.getElementById('form-step-3').classList.add('hidden');
-            
-            document.getElementById('form-step-' + step).classList.remove('hidden');
-        }
-    </script>
+  <!-- Footer -->
+  <footer class="text-center py-12 px-4 border-t border-[var(--sand)]">
+    <p class="lora-font text-xl">Intentional Strangers</p>
+    <p class="mt-2 text-sm text-[var(--muted)]">© 2025. Made in Vancouver for thoughtful souls everywhere.</p>
+  </footer>
 
+  <script>
+    // Envelope interactions (accessible)
+    const envelopeBtn = document.getElementById('envelope');
+    const envelopeCta = document.getElementById('envelope-cta');
+    envelopeBtn?.addEventListener('click', () => {
+      const open = envelopeBtn.classList.toggle('open');
+      envelopeBtn.setAttribute('aria-expanded', String(open));
+      if (envelopeCta) envelopeCta.style.opacity = open ? '0' : '1';
+    });
+    envelopeBtn?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        envelopeBtn.click();
+      }
+    });
+
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const io = ('IntersectionObserver' in window) ? new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); } });
+    }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }) : null;
+    faders.forEach(el => io ? io.observe(el) : el.classList.add('visible'));
+
+    // Form logic (progressive enhancement)
+    const form = document.getElementById('waitlist-form');
+    const step1 = document.getElementById('form-step-1');
+    const step2 = document.getElementById('form-step-2');
+    const step3 = document.getElementById('form-step-3');
+
+    // Next button from step 1
+    form?.querySelector('[data-next="2"]').addEventListener('click', () => {
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+    });
+
+    // Submit handler
+    form?.addEventListener('submit', async (e) => {
+      if (!form.checkValidity()) return; // let browser show messages
+      e.preventDefault();
+      // Placeholder: here you would POST to your endpoint
+      // await fetch('/api/waitlist', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name: form.name.value, email: form.email.value }) });
+      step1.classList.add('hidden');
+      step2.classList.add('hidden');
+      step3.classList.remove('hidden');
+    });
+  </script>
 </body>
 </html>
