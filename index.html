@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Intentional Strangers — Slow Dating by Letter</title>
-  <meta name="description" content="A slow dating experience via handwritten letters. Human‑curated matches, privacy by design. Vancouver pilot now open." />
+  <meta name="description" content="A slow dating experience via handwritten letters. Human-curated matches, privacy by design. Vancouver pilot now open." />
   <meta property="og:title" content="Intentional Strangers — Slow Dating by Letter" />
-  <meta property="og:description" content="Handwritten letters. Human‑curated matches. Privacy by design." />
+  <meta property="og:description" content="Handwritten letters. Human-curated matches. Privacy by design." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts: Serif for headlines, Handwritten for letter, Sans for UI -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind layers (only Tailwind directives & @apply here) -->
+  <!-- Tailwind layers -->
   <style type="text/tailwindcss">
     @layer base {
       :root { --brand:#4A423A; --brand-2:#3D352E; --paper:#FDF8F0; --ink:#3D352E; --accent:#C0392B; --sand:#EAE2D6; --muted:#6F655B; }
@@ -28,8 +28,7 @@
       h1,h2,h3,h4,h5,h6 { font-family: 'Lora', ui-serif, Georgia, serif; }
       .lora-font { font-family: 'Lora', ui-serif, Georgia, serif; }
       .hand-font { font-family: 'Patrick Hand', ui-rounded, system-ui; }
-      a { @apply outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:rounded; }
-      button { @apply outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:rounded; }
+      a,button { @apply outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:rounded; }
     }
     @layer components {
       .btn-primary { @apply bg-[var(--brand)] text-[var(--paper)] px-6 py-3 rounded-full shadow hover:bg-[var(--brand-2)] transition-colors duration-300 inline-flex items-center justify-center; }
@@ -42,20 +41,21 @@
     }
   </style>
 
-  <!-- Any raw CSS that is not Tailwind goes here -->
+  <!-- Raw CSS -->
   <style>
     /* Envelope construction */
     .envelope-container { width: 320px; height: 220px; position: relative; perspective: 1000px; }
     .envelope { position:absolute; inset:0; background: linear-gradient(#f7efe5, #efe4d6); border:1px solid #dbcdbb; border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,.08); }
-    .envelope-flap { position:absolute; top:0; left:0; right:0; height:60%; background:linear-gradient(#f2e7d8,#e9dece); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .6s ease-in-out; z-index:10; }
-    .wax-seal { position:absolute; width:40px; height:40px; background-color: var(--accent); border-radius:50%; top:80px; left:50%; transform:translateX(-50%); z-index:11; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; letter-spacing:.5px; }
-    .letter { position:absolute; top:8px; left:8px; right:8px; bottom:8px; background:var(--paper); border-radius:6px; padding:18px 18px 22px; box-shadow: inset 0 0 10px rgba(0,0,0,.06); transform: translateY(60%); opacity:0; transition: transform .7s .15s, opacity .7s .15s; z-index:5; overflow:auto; }
+    .envelope-flap { position:absolute; top:0; left:0; right:0; height:60%; background:linear-gradient(#f2e7d8,#e9dece);
+      clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .6s ease-in-out; z-index:10; }
+    .wax-seal { position:absolute; width:40px; height:40px; background-color: var(--accent); border-radius:50%; top:80px; left:50%;
+      transform:translateX(-50%); z-index:11; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; letter-spacing:.5px; }
+    .letter { position:absolute; top:8px; left:8px; right:8px; bottom:8px; background:var(--paper); border-radius:6px; padding:18px 18px 22px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,.06); transform: translateY(60%); opacity:0; transition: transform .7s .15s, opacity .7s .15s; z-index:5; overflow:auto; }
     .envelope-container.open .envelope-flap { transform: rotateX(180deg); }
     .envelope-container.open .letter { transform: translateY(0); opacity:1; }
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in, .envelope-flap, .letter { transition: none !important; }
-    }
+    .envelope-container.open .wax-seal { opacity:0; pointer-events:none; transform: scale(0.95); transition: opacity .3s ease; }
+    @media (prefers-reduced-motion: reduce) { .fade-in, .envelope-flap, .letter { transition: none !important; } }
   </style>
 </head>
 
@@ -65,7 +65,7 @@
     <p class="text-2xl lora-font font-medium">Intentional Strangers</p>
     <nav class="flex items-center gap-4">
       <a href="#how-it-works" class="hidden sm:inline hover:text-[var(--accent)]">How It Works</a>
-      <a href="#pledge" class="hidden sm:inline hover:text-[var(--accent)]">Our Pledge</a>
+      <a href="#pledge" class="hidden sm:inline hover:text-[var(--accent)]">Our Ppledge</a>
       <a href="#waitlist" class="btn-secondary text-sm">Join Waitlist</a>
     </nav>
   </header>
@@ -74,23 +74,6 @@
   <main class="text-center section pt-16">
     <h1 class="text-4xl md:text-6xl lora-font font-semibold leading-tight max-w-3xl mx-auto">Your Next Chapter Begins with a Letter.</h1>
     <p class="mt-6 text-lg max-w-2xl mx-auto text-[var(--muted)]">A slow dating experience for those who value words over algorithms. We connect thoughtful souls through the lost art of handwritten letters, fostering connections that are patient, private, and profound.</p>
-
-    <!-- Centered envelope with accessible button -->
-    <div class="mt-12 flex justify-center">
-      <button id="envelope" class="envelope-container group" aria-expanded="false" aria-controls="letter-panel" type="button">
-        <div class="envelope" aria-hidden="true"></div>
-        <div class="envelope-flap" aria-hidden="true"></div>
-        <div class="wax-seal" aria-hidden="true">IS</div>
-        <!-- Revealed letter content -->
-        <div id="letter-panel" class="letter">
-          <p class="hand-font text-xl leading-7 text-[rgba(0,0,0,.8)]">Dear Stranger,</p>
-          <p class="hand-font text-xl leading-7 mt-2 text-[rgba(0,0,0,.75)]">What a beautiful idea this is... I am so glad to have been matched and finally get to know someone deeply. The swiping was killing me to be honest!</p>
-          <p class="hand-font text-xl leading-7 mt-2 text-[rgba(0,0,0,.75)]">I thought I would start by telling you a little about what’s important to me...</p>
-          <p class="hand-font text-sm mt-4 text-right text-[rgba(0,0,0,.55)]">— in pencil, just the way letters used to be</p>
-        </div>
-      </button>
-    </div>
-    <p id="envelope-cta" class="mt-4 text-sm text-[var(--muted)] transition-opacity duration-500">(Press Enter or click the envelope to open)</p>
 
     <div class="mt-10">
       <a href="#waitlist" class="btn-primary">Become a Founding Member</a>
@@ -121,7 +104,6 @@
         </div>
       </div>
 
-      <!-- NEW CTA under The Art of Slow Dating -->
       <div class="mt-12">
         <a href="#waitlist" class="btn-primary">Be a part of the Vancouver Pilot</a>
       </div>
@@ -132,6 +114,20 @@
   <section class="section text-center">
     <h2 class="text-3xl md:text-4xl lora-font mb-4">Rediscover the Magic of Anticipation</h2>
     <p class="text-lg text-[var(--muted)] mb-10 max-w-2xl mx-auto">The weight of an envelope. The unique curve of another's handwriting. The gentle pause before you unfold their words. Romance can be slow—and that’s the point.</p>
+
+    <!-- Envelope directly below this copy -->
+    <div class="mt-12 flex justify-center">
+      <button id="envelope" class="envelope-container group" aria-expanded="false" aria-controls="letter-panel" type="button">
+        <div class="envelope" aria-hidden="true"></div>
+        <div class="envelope-flap" aria-hidden="true"></div>
+        <div class="wax-seal" aria-hidden="true">IS</div>
+        <div id="letter-panel" class="letter text-left">
+          <p class="hand-font text-xl leading-7 text-[rgba(0,0,0,.8)]">Dear Stranger,</p>
+          <p class="hand-font text-xl leading-7 mt-2 text-[rgba(0,0,0,.75)]">What a beautiful idea this is... I am so glad to have been matched and finally get to know someone deeply. The swiping was killing me to be honest...</p>
+        </div>
+      </button>
+    </div>
+    <p id="envelope-cta" class="mt-4 text-sm text-[var(--muted)] transition-opacity duration-500">(Press Enter or click the envelope to open)</p>
   </section>
 
   <!-- Our Pledge -->
@@ -143,11 +139,11 @@
           <p>✓ <span class="font-semibold">Patience &amp; Presence:</span> We encourage thoughtful replies, not instant reactions. This is a space to disconnect and be present.</p>
           <p>✓ <span class="font-semibold">Authenticity Over Perfection:</span> Your true self is more interesting than a polished profile. Share your honest thoughts and stories.</p>
           <p>✓ <span class="font-semibold">Privacy by Design:</span> Your personal contact details are never shared. We handle the logistics so you can focus on the connection.</p>
-          <p>✓ <span class="font-semibold">Kindness is Mandatory:</span> Every stranger is a person with a story. We have a zero‑tolerance policy for disrespect.</p>
+          <p>✓ <span class="font-semibold">Kindness is Mandatory:</span> Every stranger is a person with a story. We have a zero-tolerance policy for disrespect.</p>
         </div>
       </div>
       <div class="fade-in p-8 bg-[var(--paper)] rounded-lg shadow-lg" style="transition-delay:200ms">
-        <p class="text-2xl lora-font leading-relaxed">"We ask that you exchange at least <span class="text-[var(--accent)] font-bold">three letters</span> before sharing personal social media or phone numbers. Let the connection build on words first."</p>
+        <p class="text-2xl lora-font leading-relaxed text-center">"We ask that you exchange at least <span class="text-[var(--accent)] font-bold">three letters</span> before sharing personal social media or phone numbers. Let the connection build on words first."</p>
       </div>
     </div>
   </section>
@@ -156,27 +152,24 @@
   <section id="waitlist" class="section text-center">
     <h2 class="text-3xl md:text-4xl lora-font mb-4">Become a Founding Member</h2>
     <p class="text-lg text-[var(--muted)] max-w-2xl mx-auto">Our Vancouver pilot is beginning soon. The first 150 members will help shape our community and receive their first letter pack on us.</p>
-    <!-- NEW copy per request -->
-    <p class="text-lg text-[var(--muted)] max-w-3xl mx-auto mt-4">You will then receive an email directing you towards an in‑depth analysis of you as a person. Your morals, values, interests, hobbies, and any strong preferences you have. We believe anyone willing to partake in this journey, and dedicate the time to populising the questionnaire, shows a real intention to find love. There is no instant gratification, superficial swiping or hookup culture here.</p>
+    <p class="text-lg text-[var(--muted)] max-w-3xl mx-auto mt-4">
+      You will then receive an email directing you towards an in-depth analysis of you as a person. Your morals, values, interests, hobbies, and any strong preferences you have.<br>
+      We believe anyone willing to partake in this journey, and dedicate the time to populising the questionnaire, shows a real intention to find love. There is no instant gratification, superficial swiping or hookup culture here.
+    </p>
 
-    <!-- Form -->
     <div id="form-container" class="mt-10 max-w-md mx-auto bg-white/60 p-8 rounded-lg shadow-inner border border-gray-200 text-left">
       <form id="waitlist-form" novalidate>
-        <!-- Honeypot to reduce spam -->
         <input type="text" name="city" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-
         <div id="form-step-1">
           <label for="name" class="block text-lg lora-font mb-2">First, what's your first name?</label>
           <input type="text" id="name" name="name" placeholder="e.g. Alex" required class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-[var(--accent)] focus:outline-none transition">
           <button type="button" data-next="2" class="mt-4 btn-primary w-full">Next</button>
         </div>
-
         <div id="form-step-2" class="hidden">
           <label for="email" class="block text-lg lora-font mb-2">And your email address?</label>
           <input type="email" id="email" name="email" placeholder="alex@example.com" required autocomplete="email" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-[var(--accent)] focus:outline-none transition">
           <button type="submit" class="mt-4 btn-primary w-full">Join the Waitlist</button>
         </div>
-
         <div id="form-step-3" class="hidden text-center">
           <p class="text-2xl lora-font">Welcome, Stranger.</p>
           <p class="mt-2 text-[var(--muted)]">We'll be in touch soon with details about the pilot. The kettle is on.</p>
@@ -195,16 +188,16 @@
     // Envelope interactions (accessible)
     const envelopeBtn = document.getElementById('envelope');
     const envelopeCta = document.getElementById('envelope-cta');
+    const wax = envelopeBtn ? envelopeBtn.querySelector('.wax-seal') : null;
+
     envelopeBtn?.addEventListener('click', () => {
       const open = envelopeBtn.classList.toggle('open');
       envelopeBtn.setAttribute('aria-expanded', String(open));
+      if (wax) wax.setAttribute('aria-hidden', open ? 'true' : 'false');
       if (envelopeCta) envelopeCta.style.opacity = open ? '0' : '1';
     });
     envelopeBtn?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        envelopeBtn.click();
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); envelopeBtn.click(); }
     });
 
     // Fade-in on scroll
@@ -214,29 +207,5 @@
     }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }) : null;
     faders.forEach(el => io ? io.observe(el) : el.classList.add('visible'));
 
-    // Form logic (progressive enhancement)
-    const form = document.getElementById('waitlist-form');
-    const step1 = document.getElementById('form-step-1');
-    const step2 = document.getElementById('form-step-2');
-    const step3 = document.getElementById('form-step-3');
-
-    // Next button from step 1
-    form?.querySelector('[data-next="2"]').addEventListener('click', () => {
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      step1.classList.add('hidden');
-      step2.classList.remove('hidden');
-    });
-
-    // Submit handler
-    form?.addEventListener('submit', async (e) => {
-      if (!form.checkValidity()) return; // let browser show messages
-      e.preventDefault();
-      // Placeholder: here you would POST to your endpoint
-      // await fetch('/api/waitlist', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name: form.name.value, email: form.email.value }) });
-      step1.classList.add('hidden');
-      step2.classList.add('hidden');
-      step3.classList.remove('hidden');
-    });
-  </script>
-</body>
-</html>
+    // Form logic
+    const form = document.getElementById('waitlist-form'
